@@ -94,10 +94,10 @@ const DrawingCanvas = () => {
 
     const handleCanvasSubmission = () => {
         const canvas = canvasRef.current
-        // const link = document.createElement("a")
-        // link.download = "canvas-image.jpeg"
-        // link.href = canvas?.toDataURL("image/jpeg", 1.0) || 'None'
-        // link.click()
+        const link = document.createElement("a")
+        link.download = "canvas-image.jpeg"
+        link.href = canvas?.toDataURL("image/jpeg", 1.0) || 'None'
+        link.click()
 
         axios.post('http://localhost:8000/api/upload', {
             image: canvas?.toDataURL("image/jpeg", 1.0)

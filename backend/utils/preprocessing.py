@@ -44,6 +44,6 @@ def preprocess_image(image):
   )
   resized = cv2.resize(padded_image, (32, 32)) #resize to 32x32
   inverted = 255.0 - resized #invert
-  cv2.imwrite("test.png", inverted)
-  
-  return inverted
+  normalized = inverted / 255.0 #normalize
+  cv2.imwrite('test.png', inverted)
+  return normalized.reshape(1,-1) #flatten
