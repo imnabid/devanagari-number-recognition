@@ -33,12 +33,16 @@ async def predict_image(image:dict):
     img = cv2.imdecode(np_array, cv2.IMREAD_COLOR)
     processed_image = preprocess_image(img)   
     predicted_number_ann =  artificial_neural_network(processed_image)
+    print('predicted number ann',predicted_number_ann)
     predicted_number_knn = k_nearest_neighbour(processed_image)
     predicted_number_kmeans = k_means_clustering(processed_image)
     predicted_number_svm = support_vector_machine(processed_image)
-    print('predicted number ann',predicted_number_ann)
     print('predicted number knn',predicted_number_knn)
     print('predicted number kmeans',predicted_number_kmeans)
     print('predicted number svm',predicted_number_svm)
-
-    return {"message": "Hello, CORS-enabled world!"}
+    return [
+        {"model_name": "Artificial Neural Network", "prediction": int(predicted_number_ann)},
+        {"model_name": "K Nearest Neighbour", "prediction": int(predicted_number_knn)},
+        {"model_name": "K Means Clustering", "prediction": int(predicted_number_kmeans)},
+        {"model_name": "Support Vector Machine", "prediction": int(predicted_number_svm)}
+    ]

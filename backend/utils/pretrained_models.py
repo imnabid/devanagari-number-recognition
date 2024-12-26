@@ -18,6 +18,7 @@ def k_means_clustering(image):
     return prediction
 
 def artificial_neural_network(image):
+    print('inside ann')
     # image = image.reshape(1, -1)
     ann = load_model("models/ann_model.keras")
     prediction = ann.predict(image)
