@@ -37,9 +37,9 @@ async def predict_image(image:dict):
     predicted_number_knn = k_nearest_neighbour(processed_image)
     predicted_number_kmeans = k_means_clustering(processed_image)
     predicted_number_svm = support_vector_machine(processed_image)
-    print('predicted number knn',predicted_number_knn)
-    print('predicted number kmeans',predicted_number_kmeans)
-    print('predicted number svm',predicted_number_svm)
+    print('predicted number knn ',predicted_number_knn)
+    print('predicted number kmeans ',predicted_number_kmeans)
+    print('predicted number svm ',predicted_number_svm)
     return [
         {"model_name": "Artificial Neural Network", "prediction": int(predicted_number_ann)},
         {"model_name": "K Nearest Neighbour", "prediction": int(predicted_number_knn)},
