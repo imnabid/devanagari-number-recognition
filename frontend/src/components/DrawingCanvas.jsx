@@ -76,6 +76,7 @@ const DrawingCanvas = ({ onPredictionStart, onPredictionComplete }) => {
         toast.success('Canvas cleared!')
         if (context) {
             context.clearRect(0, 0, canvasSize.width, canvasSize.height)
+            setIsContinuing(false);
             
         }
     }
@@ -105,7 +106,6 @@ const DrawingCanvas = ({ onPredictionStart, onPredictionComplete }) => {
     const handleCanvasSubmission = async () => {
             setIsLoading(true);
             onPredictionStart(); 
-            
             const canvas = canvasRef.current;
             axios.post('http://localhost:8000/api/upload', {
                 image: canvas?.toDataURL("image/jpeg", 1.0)

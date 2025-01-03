@@ -10,7 +10,7 @@ from utils.pretrained_models import k_nearest_neighbour, artificial_neural_netwo
 app = FastAPI()
 
 origins = [
-    "http://localhost:3001",         
+    "http://localhost:3000",         
 ]
 
 app.add_middleware(
@@ -24,6 +24,7 @@ app.add_middleware(
 
 @app.post("/api/upload")
 async def predict_image(image:dict):
+    print('hellllllo')
     image_base64 = image.get("image")
     if not image_base64:
         raise HTTPException(status_code=400, detail="No image data found")
@@ -41,8 +42,8 @@ async def predict_image(image:dict):
     print('predicted number kmeans ',predicted_number_kmeans)
     print('predicted number svm ',predicted_number_svm)
     return [
-        {"model_name": "Artificial Neural Network", "prediction": int(predicted_number_ann)},
-        {"model_name": "K Nearest Neighbour", "prediction": int(predicted_number_knn)},
-        {"model_name": "K Means Clustering", "prediction": int(predicted_number_kmeans)},
-        {"model_name": "Support Vector Machine", "prediction": int(predicted_number_svm)}
+        {"model_name": "Artificial Neural Network", "prediction": int(predicted_number_ann), 'accuracy': 0.97},
+        {"model_name": "K Nearest Neighbour", "prediction": int(predicted_number_knn), 'accuracy': 0.96},
+        {"model_name": "K Means Clustering", "prediction": int(predicted_number_kmeans), 'accuracy': 0.65},
+        {"model_name": "Support Vector Machine", "prediction": int(predicted_number_svm), 'accuracy': 0.96}
     ]

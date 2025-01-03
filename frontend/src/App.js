@@ -4,51 +4,26 @@ import { Brain, Share2, Timer } from 'lucide-react';
 import DrawingCanvas from './components/DrawingCanvas';
 import Lottie from 'react-lottie-player';
 
-// const fetchDataFromBackend = async () => {
-//   await new Promise((resolve) => setTimeout(resolve, 1000));
-//   return {
-//     algorithms: ['knn', 'kmeans', 'ann', 'svm'],
-//     algorithmNames: {
-//       knn: 'K-Nearest Neighbors',
-//       kmeans: 'K-Means Clustering',
-//       ann: 'Artificial Neural Network',
-//       svm: 'Support Vector Machine'
-//     },
-//     predictions: {
-//       knn: { number: '५', accuracy: 0.95, precision: 0.94, recall: 0.95, f1Score: 0.94 },
-//       kmeans: { number: '५', accuracy: 0.92, precision: 0.91, recall: 0.92, f1Score: 0.91 },
-//       ann: { number: '५', accuracy: 0.97, precision: 0.96, recall: 0.97, f1Score: 0.96 },
-//       svm: { number: '५', accuracy: 0.96, precision: 0.95, recall: 0.96, f1Score: 0.95 }
-//     }
-//   };
-// };
 
 const algorithms = [
   {
-    name: 'K-Nearest Neighbors', accuracy: 0.95, precision: 0.94, recall: 0.95, f1Score: 0.94,
-    img: 'no-search.png'
+    name: 'K-Nearest Neighbors', accuracy: 0.96, precision: 0.96, recall: 0.96, f1Score: 0.96,
+    img: 'knn.png'
   },
   {
-    name: 'K-Means Clustering', accuracy: 0.92, precision: 0.91, recall: 0.92, f1Score: 0.91,
-    img: 'no-search.png'
+    name: 'K-Means Clustering', accuracy: 0.65, precision: 0.71, recall: 0.65, f1Score: 0.66,
+    img: 'kmeans.png'
   },
   {
-    name: 'Artificial Neural Network', accuracy: 0.97, precision: 0.96, recall: 0.97, f1Score: 0.96,
-    img: 'no-search.png'
+    name: 'Artificial Neural Network', accuracy: 0.97, precision: 0.97, recall: 0.97, f1Score: 0.97,
+    img: 'ann.png'
   },
   {
-    name: 'Support Vector Machine', accuracy: 0.96, precision: 0.95, recall: 0.96, f1Score: 0.95,
-    img: 'no-search.png'
+    name: 'Support Vector Machine', accuracy: 0.96, precision: 0.96, recall: 0.96, f1Score: 0.96,
+    img: 'svm.png'
   }
 ]
 
-
-const FeatureCard = ({ icon: Icon, text }) => (
-  <div className="p-3 bg-gray-800/50 rounded-lg border border-gray-700">
-    <Icon className="h-6 w-6 mx-auto mb-2 text-blue-400" />
-    <p className="text-sm text-gray-300">{text}</p>
-  </div>
-);
 
 const AlgorithmResult = ({ name, accuracy, prediction }) => (
   <div className="p-3 bg-gray-800/50 rounded-lg border border-gray-700 flex justify-between items-center">
@@ -66,38 +41,7 @@ const AlgorithmResult = ({ name, accuracy, prediction }) => (
   </div>
 );
 
-const MetricsPanel = ({ metrics }) => (
-  <div className="bg-gray-800/50 p-4 rounded-lg border border-gray-700">
-    <h3 className="text-lg font-semibold text-gray-200 mb-2">Metrics</h3>
-    <div className="space-y-2">
-      {Object.entries(metrics).map(([key, value]) => {
-        const formattedKey = key.replace(/([A-Z])/g, ' $1').toLowerCase();
-        return (
-          <p key={key} className="text-sm text-gray-300">
-            {formattedKey.charAt(0).toUpperCase() + formattedKey.slice(1)}: {
-              key === 'number' ? value : typeof value === 'number' ? value.toFixed(3) : '0'
-            }
-          </p>
-        );
-      })}
-    </div>
-  </div>
-);
 
-const ConfusionMatrix = ({ algorithmName }) => (
-  <div className="bg-gray-800/50 p-4 rounded-lg border border-gray-700">
-    <h3 className="text-lg font-semibold text-gray-200 mb-2">
-      Confusion Matrix
-    </h3>
-    <div className="flex justify-center">
-      <img
-        src="/api/placeholder/250/250"
-        alt={`Confusion Matrix for ${algorithmName}`}
-        className="w-[250px] h-[250px]"
-      />
-    </div>
-  </div>
-);
 
 export default function App() {
   const [selectedAlgorithm, setSelectedAlgorithm] = useState(algorithms[0]);
@@ -159,7 +103,7 @@ export default function App() {
                     <AlgorithmResult
                       key={item.model_name}
                       name={item.model_name}
-                      accuracy={92}
+                      accuracy={item.accuracy}
                       prediction={item.prediction}
                     />
                   ))}
@@ -205,7 +149,7 @@ export default function App() {
             <p>F1 Score: {selectedAlgorithm.f1Score}</p>
             </div>
             <div>
-              <img src='no-search.png' alt="Algorithm" className="w-auto h-[200px]" />
+              <img src={selectedAlgorithm.img} alt="Algorithm" className="w-auto h-[350px]" />
             </div>
           </div>
         </div>
