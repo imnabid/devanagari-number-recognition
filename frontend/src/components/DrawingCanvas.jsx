@@ -3,6 +3,8 @@ import toast from 'react-hot-toast';
 import { RotateCcw, Eraser, Pencil } from 'lucide-react'
 import axios from 'axios';
 
+const apiURL = process.env.REACT_APP_API_URL;
+
 const DrawingCanvas = ({ onPredictionStart, onPredictionComplete }) => {
     const canvasRef = useRef(null)
     const [isDrawing, setIsDrawing] = useState(false)
@@ -104,10 +106,11 @@ const DrawingCanvas = ({ onPredictionStart, onPredictionComplete }) => {
     }
 
     const handleCanvasSubmission = async () => {
+
             setIsLoading(true);
             onPredictionStart(); 
             const canvas = canvasRef.current;
-            axios.post('http://localhost:8000/api/upload', {
+            axios.post(`${apiURL}/api/upload`, {
                 image: canvas?.toDataURL("image/jpeg", 1.0)
             }, {
                 headers: {

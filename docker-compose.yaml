@@ -1,0 +1,14 @@
+version: '3'
+services:
+  backend:
+    image: imnabid/fastapi-devanagari-ml:v1
+    container_name: fastapi-devanagari-ml
+    ports:
+      - "8000:8000"
+  frontend:
+    image: imnabid/devanagari-frontend:v1
+    container_name: devanagari-frontend
+    environment:
+      - REACT_APP_API_URL=http://backend:8000
+    ports:
+      - "3000:80"  

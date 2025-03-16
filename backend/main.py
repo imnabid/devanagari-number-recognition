@@ -9,9 +9,7 @@ from utils.pretrained_models import k_nearest_neighbour, artificial_neural_netwo
 
 app = FastAPI()
 
-origins = [
-    "http://localhost:3000",         
-]
+origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
